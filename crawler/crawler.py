@@ -1,16 +1,26 @@
 from datetime import datetime
 def timestamp():
+    '''
+        timestamp return time (like '1995-06-23')
+    '''
     return str(datetime.now())[:10]
+
 
 data_folder = 'data/'
 data_format = '.json'
 import json
 from os import listdir
 def load(reload=False):
+    '''
+        load from data_folder
+    '''
     news = [ int(n[:-len(data_format)]) for n in listdir(data_folder) ]
     return (reload or not news) and -1 or max(news)
 
 def save(name, data):
+    '''
+        save to data_folder
+    '''
     if name.isdigit():
         with open(data_folder + name + data_format, 'w') as f:
             json.dump(data, f)
@@ -22,6 +32,9 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup as bs
 import bs4
 def get(href):
+    '''
+        get content of articles
+    '''
     content = urlopen('http://' in href and href or domain + href).read()
     soup = bs(content, 'lxml')
     try:
@@ -33,6 +46,9 @@ def get(href):
         return {'title': '', 'date': '', 'text':''}
 
 def crawl(last=0):
+    '''
+        crawling page and get hrefs of articles
+    '''
     page = 0
     while True:
         content = urlopen(domain + query + str(page)).read()
