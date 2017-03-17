@@ -18,6 +18,18 @@ $ python crawler.py
 ```
 
 # parser
+파서는 [크롤러](#Crawler)가 크롤링한 데이터를 통해 이벤트를 파싱합니다.
+
+### requirements
+- json
+- re
+- os.path.isfile
+- os. remove, listdir
+
+### execute
+```
+$ python parser.py
+```
 
 ## news
 
